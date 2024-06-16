@@ -6,6 +6,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import {globalStyles} from "@/constants/Styles";
 import {Colors} from "@/constants/Colors";
 import {ThemedIcon} from "@/components/themed/ThemedIcon";
+import DownloadComponent from "@/modules/DownloadComponent";
 
 const workers = [
     {
@@ -22,6 +23,11 @@ export default function TBT() {
         <SafeAreaView>
             <View style={{padding: 20}}>
                 <FlatList
+
+                    ListHeaderComponentStyle={{marginBottom: 20}}
+                    ListHeaderComponent={()=>(
+                        <DownloadComponent/>
+                    )}
                     data={workers}
                     renderItem={({item}) => (
                         <ThemedCard style={{padding: 10,  marginBottom: 10,display:"flex",flexDirection:"row",gap:10}}>

@@ -58,6 +58,12 @@ export default function RootLayout() {
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="+not-found" />
+          <Stack.Screen
+              options={{
+                headerTitle: "New TBT",
+                headerBackTitle: "Back",
+              }}
+              name="add_tbt" />
         </Stack>
       </ThemeProvider>
       <Toast />

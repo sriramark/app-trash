@@ -23,10 +23,6 @@ export default function Workers() {
         <SafeAreaView>
             <View style={{padding: 20}}>
                 <FlatList
-                    ListHeaderComponentStyle={{marginBottom: 20}}
-                    ListHeaderComponent={()=>(
-                        <DownloadComponent/>
-                    )}
                     data={workers}
                     renderItem={({item}) => (
                         <ThemedCard style={styles.wrapper}>
