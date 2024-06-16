@@ -1,10 +1,8 @@
-import {FlatList, Image, SafeAreaView, Text, View} from "react-native";
+import {FlatList, SafeAreaView, View} from "react-native";
 import {ThemedCard} from "@/components/ThemedCard";
 import {ThemedText} from "@/components/themed/ThemedText";
 import {globalTextSizes} from "@/constants/Sizes";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import {globalStyles} from "@/constants/Styles";
-import {Colors} from "@/constants/Colors";
 import {ThemedIcon} from "@/components/themed/ThemedIcon";
 import DownloadComponent from "@/modules/DownloadComponent";
 
@@ -15,6 +13,10 @@ const workers = [
     },
     {
         title: "Disaster",
+        num: 60,
+    },
+    {
+        title: "Risk",
         num: 60,
     }
 ]
@@ -30,7 +32,13 @@ export default function TBT() {
                     )}
                     data={workers}
                     renderItem={({item}) => (
-                        <ThemedCard style={{padding: 10,  marginBottom: 10,display:"flex",flexDirection:"row",gap:10}}>
+                        <ThemedCard style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            gap: 10,
+                            marginBottom: 10,
+                            padding: 10
+                        }}>
 
                             <View>
                                 <ThemedText type={"semiBold"} style={{fontSize:globalTextSizes.medium}}>{item.title}</ThemedText>

@@ -6,7 +6,6 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import {globalStyles} from "@/constants/Styles";
 import {Colors} from "@/constants/Colors";
 import {ThemedIcon} from "@/components/themed/ThemedIcon";
-import DownloadComponent from "@/modules/DownloadComponent";
 
 const workers = [
     {
