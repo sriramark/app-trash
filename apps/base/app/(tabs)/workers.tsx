@@ -1,70 +1,69 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import {FlatList, Image, SafeAreaView, StyleSheet, View} from "react-native";
+import {ThemedCard} from "@/components/ThemedCard";
+import {ThemedText} from "@/components/themed/ThemedText";
+import {globalTextSizes} from "@/constants/Sizes";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import {globalStyles} from "@/constants/Styles";
+import {Colors} from "@/constants/Colors";
+import {ThemedIcon} from "@/components/themed/ThemedIcon";
+import DownloadComponent from "@/modules/DownloadComponent";
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+const workers = [
+    {
+        name: "John Doe",
+        designation: "Electrician",
+    },
+    {
+        name: "Jane Doe",
+        designation: "Plumber",
+    }
+]
+export default function Workers() {
+    return (
+        <SafeAreaView>
+            <View style={{padding: 20}}>
+                <FlatList
+                    ListHeaderComponentStyle={{marginBottom: 20}}
+                    ListHeaderComponent={()=>(
+                        <DownloadComponent/>
+                    )}
+                    data={workers}
+                    renderItem={({item}) => (
+                        <ThemedCard style={styles.wrapper}>
 
-export default function HomeScreen() {
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({ ios: 'cmd + d', android: 'cmd + m' })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
-  );
+                            <Image
+                                source={{uri: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}}
+                                style={{width: 60, height: 60, borderRadius: 100}}/>
+                            <View>
+                                <ThemedText type={"semiBold"}
+                                            style={{fontSize: globalTextSizes.medium}}>{item.name}</ThemedText>
+                                <View style={globalStyles.horizontal}>
+                                    <Ionicons name={"ellipse"} size={10} color={Colors.primaryColor}/>
+                                    <ThemedText>{item.designation}</ThemedText>
+                                </View>
+                            </View>
+                            <View style={styles.rightIconWrapper}>
+                                <ThemedIcon name={"document-outline"} size={24}/>
+                            </View>
+                        </ThemedCard>
+                    )}
+                />
+            </View>
+        </SafeAreaView>
+    )
 }
-
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
-});
+    wrapper: {
+        padding: 10,
+        marginBottom: 10,
+        display: "flex",
+        flexDirection: "row",
+        gap: 10
+    },
+    rightIconWrapper: {
+        marginLeft: "auto",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
+    }
+})

@@ -1,14 +1,18 @@
-import { Dimensions, FlatList, StyleSheet, Text, View } from 'react-native'
+import {Dimensions, FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import React from 'react'
-import { useTheme } from '@react-navigation/native'
-import { Colors } from '@/constants/Colors'
-import { ThemedCard } from '@/components/ThemedCard'
-import { Ionicons } from '@expo/vector-icons'
+import {useTheme} from '@react-navigation/native'
+import {Colors} from '@/constants/Colors'
+import {ThemedCard} from '@/components/ThemedCard'
+import {Ionicons} from '@expo/vector-icons'
+import {ThemedText} from "@/components/themed/ThemedText";
+import {globalTextSizes} from "@/constants/Sizes";
+import {router} from "expo-router";
+
 const width = Dimensions.get("window").width
 type Card = {
     title: string,
     value: string,
-    icon: 'clipboard-outline' | 'cash-outline' | 'wallet-outline' | 'card-outline',
+    icon: 'clipboard-outline' | 'cash-outline' | 'wallet-outline' | 'card-outline' | 'archive-outline',
     color: string
 }
 const data: Card[] = [
@@ -16,53 +20,57 @@ const data: Card[] = [
         title: "TBT",
         value: "480",
         icon: "clipboard-outline",
-        color: "#FF9A00"
+        color: "#0173DF",
+        href: "/tbt"
     },
     {
         title: "PTW",
         value: "480",
         icon: "cash-outline",
-        color: "#FF9A00"
+        color: "#FF9A00",
+        href: "/ptw"
     },
     {
         title: "Inspections",
         value: "480",
         icon: "clipboard-outline",
-        color: "#FF9A00"
+        color: "#FF9A00",
+        href: "/inspections"
     },
     {
         title: "Incidents",
         value: "480",
-        icon: "clipboard-outline",
-        color: "#FF9A00"
+        icon: "archive-outline",
+        color: "#1F8905",
+        href: "/incidents"
     },
 ]
 
 export default function DashboardComponent() {
-    const { colors } = useTheme()
+    const {colors} = useTheme()
     return (
         <View>
-            <View style={{ backgroundColor: Colors.primaryColor, borderTopLeftRadius: 20, borderTopRightRadius: 20, paddingVertical: 15, paddingHorizontal: 20 }}>
-                <Text style={{ fontSize: 20, color: "white", fontWeight: "600" }}>Dashboard</Text>
-            </View>
-            <View style={{
-                borderWidth: 1, borderColor: colors.border, padding: 20, display: "flex", flexDirection: "row", gap: 10, flexWrap: "wrap", justifyContent: "space-between",
-                borderBottomEndRadius: 20, borderBottomStartRadius: 20
+            <ThemedText type={"semiBold"} style={{fontSize:globalTextSizes.medium,marginBottom:10,opacity:0.6}}>Dashboard</ThemedText>
 
-            }}>
 
 
                 <FlatList
+                    scrollEnabled={false}
                     numColumns={2}
-                    ItemSeparatorComponent={() => <View style={{ height: 10 }}></View>}
-                    columnWrapperStyle={{ justifyContent: "space-between" }}
+                    ItemSeparatorComponent={() => <View style={{height: 10}}></View>}
+                    columnWrapperStyle={{justifyContent: "space-between"}}
                     data={data}
                     keyExtractor={(item, index) => index.toString()}
-                    renderItem={({ item }) => (
+                    renderItem={({item}) => (
+                        <TouchableOpacity
+                            onPress={() => {
+                                router.push(item.href)
+                            }}
+                            >
+
                         <ThemedCard
                             style={{
-                                borderRadius: 10,
-                                width: (width - 90) / 2,
+                                width: (width - 50) / 2,
                                 display: "flex",
                                 flexDirection: "column",
                                 gap: 10,
@@ -70,16 +78,11 @@ export default function DashboardComponent() {
                         >
                             <View
                                 style={{
-                                    borderWidth: 1,
-                                    borderColor: colors.border,
-                                    borderRadius: 100,
                                     justifyContent: "center",
-                                    alignItems: "center",
                                     width: 40,
-                                    height: 40,
                                 }}
                             >
-                                <Ionicons name={item.icon} size={20} color={item.color} />
+                                <Ionicons name={item.icon} size={20} color={item.color}/>
                             </View>
                             <Text
                                 style={{
@@ -96,10 +99,10 @@ export default function DashboardComponent() {
                                 }}
                             >{item.title}</Text>
                         </ThemedCard>
+                        </TouchableOpacity>
                     )}
                 />
 
-            </View>
         </View>
     )
 }

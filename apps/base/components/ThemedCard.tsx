@@ -10,7 +10,7 @@ export type ThemedCardProps = ViewProps & {
 
 export function ThemedCard({ style, lightColor, darkColor, ...otherProps }: ThemedCardProps) {
   const { colors } = useTheme()
-  const backgroundColor = useThemeColor({ light: colors.background, dark: colors.background }, 'background');
+  const backgroundColor = useThemeColor({ light: colors.card, dark: colors.card }, 'background');
 
   return <View style={[{
     backgroundColor,
@@ -19,7 +19,8 @@ export function ThemedCard({ style, lightColor, darkColor, ...otherProps }: Them
 }
 const styles = StyleSheet.create({
   cardWrapper: {
-    borderWidth: 1,
-    padding: 10,
+    borderWidth: 0.5,
+    padding: 15,
+    borderRadius: 20,
   },
 })
